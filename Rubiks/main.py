@@ -7,7 +7,6 @@ import solver
 def main():
     """Test cube's rotations."""
     c = Cube()
-    c.print() 
     x = input()
     string = "D' F U L' U"
     directions = recognize_rotations(string)

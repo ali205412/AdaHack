@@ -233,7 +233,6 @@ def run(c=Cube()):
     print('Time: {:.1f} seconds.\n'
         .format(time.perf_counter() - start_time))
 
-    # Amount of possible cube variants in 20 rotations
     print('Variants:\n', pow(12, 20))
 
 
