@@ -11,6 +11,7 @@ green = 0, 203, 40
 colors = [red, yellow, blue, white, green, orange]
 
 
+
 def initialize(screen, x, y):
     pygame.draw.rect(screen, (255, 255, 255), (x, y, 40, 40), 3)
     pygame.draw.rect(screen, (255, 255, 255), (x + 40, y, 40, 40), 3)
