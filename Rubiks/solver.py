@@ -13,35 +13,34 @@ def maxcalls():
 
 # TODO
 allowed_sequences = [
-    "R U R' U R U2 R'", # Sune
-    "R U2 R' U' R U' R'", # Anti-Sune
-    "R' F R F'", # Sledgehammer
-    "R U R' U'", # Sexy Move
-    "U R U' R'", # Reverse Sexy
-    # "M2 U M U2 M' U M2", # U Perms
-    # "M2 U' M U2 M' U' M2", # U Perms
-    "R U R' U R' F R2 U' R' U' R U R' F'", # T Perm
-    "R' U L' U2 R U' R' U2 R L", # J Perms
-    "L' U' L F L' U' L U L F' L2' U L U", # J Perms
-    "R U R' F' R U R' U' R' F R2 U' R' U'", # J Perms
-    # "M2' U' M2' U2' M2' U' M2'", # H Perm
-    "R U R' U' R' F R F'", # Key
-    "F R U R' U' F'", # T
-    "F (R U R' U') (R U R' U') F'", # Bottlecap
-    "F U R U' R' U R U' R' F'", # Bottlecap
-    # "M2 E2 S2", # Checkerboard
-    "R2 L2 U2 D2 F2 B2", # Checkerboard
-    # "M' U' M2' U' M2' U' M' U2 M2' U", # Z Perm
+    "R U R' U R U2 R'", 
+    "R U2 R' U' R U' R'", 
+    "R' F R F'", 
+    "R U R' U'", 
+    "U R U' R'", 
+    "M2 U M U2 M' U M2", 
+    "M2 U' M U2 M' U' M2", 
+    "R U R' U R' F R2 U' R' U' R U R' F'",
+    "R' U L' U2 R U' R' U2 R L", 
+    "L' U' L F L' U' L U L F' L2' U L U", 
+    "R U R' F' R U R' U' R' F R2 U' R' U'", 
+    "M2' U' M2' U2' M2' U' M2'", 
+    "R U R' U' R' F R F'", 
+    "F R U R' U' F'", 
+    "F (R U R' U') (R U R' U') F'", 
+    "F U R U' R' U R U' R' F'", 
+    "M2 E2 S2", 
+    "R2 L2 U2 D2 F2 B2", 
+    "M' U' M2' U' M2' U' M' U2 M2' U", 
 ]
 
 class Solution:
-    """Solution of the cube. It is a sequence of rotations.
-    Rotation is a Directions enum item from rotation.py."""
+
 
     def __init__(self):
         self.directions = []
         self.achieved = False
-        self.count = 0 # amount of assembled colors
+        self.count = 0 
 
     def as_string(self):
         s = [d.value for d in self.directions]
@@ -51,10 +50,9 @@ class Solution:
         print(self.as_string())
 
     def compare_with(self, solution):
-        """Compare this solution
-        with the best one defined in a global variable."""
+        
         if type(solution) != Solution:
-            raise TypeError('Solution.compare_with() expects a Solution object.')
+            raise TypeError('')
         if self.count < solution.count:
             self.directions = solution.directions
             self.count = max(self.count, solution.count)
@@ -65,19 +63,14 @@ class Solution:
         self.directions.extend(another_solution.directions)
 
     def next_rotate_direcion_is_ok(self, d0):
-        """Add some limitations to the next rotation.
-        'd' indexes are numbered from right to left."""
-
+     
         def equal(*directions):
-            """Check if all directions are equal."""
             return all(x.value == directions[0].value for x in directions[1:])
 
         def is_back(d1, d2):
-            """Check if second rotation is the back one for the first."""
             return d1.value == d2.value + "'" or d1.value + "'" == d2.value
 
         def are_opposite_faces(d1, d2):
-            """Check if two rotations are applied to the opposite faces."""
             if d1.name.startswith('F') and d2.name.startswith('B'):
                 return True
             elif d1.name.startswith('L') and d2.name.startswith('R'):
@@ -92,14 +85,12 @@ class Solution:
         if len(self.directions) >= 1:
             d1 = self.directions[-1]
 
-            # Exclude patterns like "F' F"
             if is_back(d0, d1):
                 return False
 
             if len(self.directions) >= 2:
                 d2 = self.directions[-2]
 
-                # Exclude patterns like "F F F" and "F' B F"
                 if equal(d0, d1, d2):
                     return False
                 if are_opposite_faces(d0, d1) and is_back(d0, d2):
@@ -108,38 +99,34 @@ class Solution:
                 if len(self.directions) >= 3:
                     d3 = self.directions[-3]
 
-                    # Exclude patterns like "F F B F", "F B F F"
                     if equal(d0, d2, d3) and are_opposite_faces(d0, d1):
                         return False
                     if equal(d0, d1, d3) and are_opposite_faces(d0, d2):
                         return False
 
-                    # Exclude patterns like "F' B B F"
                     if is_back(d0, d3) and are_opposite_faces(d0, d1) and are_opposite_faces(d0, d2):
                         return False
 
                     if len(self.directions) >= 4:
                         d4 = self.directions[-4]
 
-                        # Exclude patterns like "F F B B F", "F F B B F'"
                         if equal(d0, d3, d4) and are_opposite_faces(d0, d1) and are_opposite_faces(d0, d2):
                             return False
 
         return True
 
 
-MAXDEPTH = 5 # amount of cube rotations in final solution formula
-MAXROTATIONS = 12**MAXDEPTH # amount of cube variants
-MAXCALLS = maxcalls() # 12^0 + 12^1 + ... + 12^MAXDEPTH
-total_rotations = 0 # amount of performed rotations
-total_calls = 0 # amount of graph nodes
-total_depth = 0 # amount of graph levels
+MAXDEPTH = 5 
+MAXROTATIONS = 12**MAXDEPTH 
+MAXCALLS = maxcalls() 
+total_rotations = 0 
+total_calls = 0 
+total_depth = 0 
 best_solution = Solution()
 longest_formula = Solution()
 
 
 def solve(cube, solution=Solution(), depth=1):
-    """Recursive function to find the solution."""
 
     global longest_formula
 
@@ -181,8 +168,6 @@ def solve(cube, solution=Solution(), depth=1):
             s.count = c.count() # count assembled colors
             best_solution.compare_with(s)
 
-            """Check if current solution is the longest one.
-            Using it for developing better filters."""
             if len(s.directions) > len(longest_formula.directions):
                 longest_formula = s
 
@@ -219,21 +204,21 @@ def run(c=Cube()):
     print(best_solution.as_string())
 
     if s is None or not s.achieved:
-        print('Not solved.')
+        print('Fail.')
     else:
-        print('Solved', s.achieved)
+        print('Success', s.achieved)
 
-    print('Longest formula:')
+    print('Upper End:')
     print(longest_formula.as_string())
 
     print()
-    print('Depth:', total_depth)
-    print('Calls: {} of max {}'.format(total_calls, maxcalls()))
-    print('Rotations: {} of max {}'.format(total_rotations, 12**total_depth))
-    print('Time: {:.1f} seconds.\n'
+    print('Height:', total_depth)
+    print('Attempts: {} of max {}'.format(total_calls, maxcalls()))
+    print('Rota: {} of max {}'.format(total_rotations, 12**total_depth))
+    print('Elapsed: {:.1f} seconds.\n'
         .format(time.perf_counter() - start_time))
 
-    print('Variants:\n', pow(12, 20))
+    print('Var:\n', pow(12, 20))
 
 
 if __name__ == '__main__':

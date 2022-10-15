@@ -1,4 +1,3 @@
-# Represents a face of the cube
 class Face(object):
 
 
