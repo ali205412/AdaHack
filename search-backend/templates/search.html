@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+</head>
+<body>
+<form id="form">
+    <input type="search" id="query" name="q" placeholder="Search...">
+    <button id="search-btn" type="button">Search</button>
+</form>
+Searching: <div id="status"></div>
+<br>
+Result:
+<div id="result"></div>
+
+</body>
+<script>
+    // get the search bar
+    const input = document.querySelector('input')
+
+    // get the button
+    const button = document.querySelector('button')
+    const result = document.getElementById('result')
+    const status = document.getElementById('status')
+
+    button.addEventListener('click', async () => {
+        // run ajax request
+        const response = await fetch('http://localhost:8000/search?keyword=' + input.value,)
+        status.innerText = input.value
+        arr = await response.json()
+        result.innerHTML = arr.map((value) => `<a href=/viewDetail?name=${encodeURI(value)}>${value}</a><br>`)
+    })
+</script>
+</html>
