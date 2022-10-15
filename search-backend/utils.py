@@ -17,7 +17,6 @@ def preprocessing() -> Dict:
         try:
             with open(f'{base_dir}/{i}/eufs_metadata.yaml', mode='r') as f:
                 data = yaml.safe_load(f)
-            print(data)
             desc = data['description']
             descriptions.append(desc)
             desc_to_name[desc] = i
@@ -44,5 +43,4 @@ def draw_map(file_address: str) -> str:
     my_stringIObytes = io.BytesIO()
     plt.savefig(my_stringIObytes, format='jpg')
     my_stringIObytes.seek(0)
-    my_base64_jpgData = base64.b64encode(my_stringIObytes.read())
-    return my_base64_jpgData
+    return my_stringIObytes

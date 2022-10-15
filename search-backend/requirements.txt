@@ -1,5 +1,6 @@
-pyyaml
-fastapi
+pyyaml~=6.0
+fastapi~=0.85.1
 uvicorn[standard]
-matplotlib
-pandas
+matplotlib~=3.6.1
+pandas~=1.5.0
+starlette~=0.20.4
