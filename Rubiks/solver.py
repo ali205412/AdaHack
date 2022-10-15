@@ -202,21 +202,20 @@ def solve(cube, solution=Solution(), depth=1):
 
 
 def run(c=Cube()):
-    """Solve the cube."""
 
     import time
     start_time = time.perf_counter()
 
     s = solve(c)
     if total_depth > MAXDEPTH:
-        print('Too deep,', total_depth)
+        print('DEEP MAX,', total_depth)
     if total_calls > MAXCALLS:
-        print('Too many calls,', total_calls)
+        print('CALL MAX,', total_calls)
     if total_rotations > MAXROTATIONS:
-        print('Too many rotations,', total_rotations)
+        print('ROTA MAX,', total_rotations)
 
-    print('Best solution - {} colors in place:'.format(best_solution.count))
-    print(len(best_solution.directions), 'rotations')
+    print('Optimal sol - {} colours in place:'.format(best_solution.count))
+    print(len(best_solution.directions), 'rot')
     print(best_solution.as_string())
 
     if s is None or not s.achieved:
@@ -228,14 +227,14 @@ def run(c=Cube()):
     print(longest_formula.as_string())
 
     print()
-    print('Total depth:', total_depth)
-    print('Total calls: {} of max {}'.format(total_calls, maxcalls()))
-    print('Total rotations: {} of max {}'.format(total_rotations, 12**total_depth))
-    print('Total time: {:.1f} seconds.\n'
+    print('Depth:', total_depth)
+    print('Calls: {} of max {}'.format(total_calls, maxcalls()))
+    print('Rotations: {} of max {}'.format(total_rotations, 12**total_depth))
+    print('Time: {:.1f} seconds.\n'
         .format(time.perf_counter() - start_time))
 
     # Amount of possible cube variants in 20 rotations
-    print('Possible variants:\n', pow(12, 20))
+    print('Variants:\n', pow(12, 20))
 
 
 if __name__ == '__main__':
