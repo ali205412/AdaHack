@@ -130,7 +130,6 @@ def solve(cube, solution=Solution(), depth=1):
 
     global longest_formula
 
-    # Check if cube is already assembled
     global best_solution
     if cube.is_assembled():
         solution.achieved = True
@@ -150,12 +149,10 @@ def solve(cube, solution=Solution(), depth=1):
     global MAXROTATIONS, total_rotations
     for d in list(Directions):
 
-        # Apply rotation and remember the sequence of directions
         if total_rotations >= MAXROTATIONS:
             continue
         else:
 
-            # Add some rules to limit the search space
             if not solution.next_rotate_direcion_is_ok(d):
                 continue
 
@@ -165,20 +162,18 @@ def solve(cube, solution=Solution(), depth=1):
 
             s = Solution()
             s.directions = solution.directions + [d]
-            s.count = c.count() # count assembled colors
+            s.count = c.count() 
             best_solution.compare_with(s)
 
             if len(s.directions) > len(longest_formula.directions):
                 longest_formula = s
 
-            # Recursively solve the cube
             if c.is_assembled():
                 s.achieved = True
                 best_solution = s
                 return s
             else:
                 if depth + 1 > MAXDEPTH:
-                    # Continue with the next rotation on the same level
                     continue 
                 else:
                     s = solve(c, s, depth + 1)
