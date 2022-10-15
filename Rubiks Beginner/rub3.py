@@ -2,6 +2,9 @@ import pygame
 from pygame.locals import *
 import time
 
+scr = pygame.display.set_mode((440, 580))
+scr.fill((155, 155, 155))
+
 blue = 114, 187, 255
 white = 230, 230, 255
 yellow = 175, 232, 65
@@ -86,11 +89,6 @@ def color_update(matrix, screen):
     color_side(matrix[4], 43, 203, 4, screen)
     color_side(matrix[5], 163, 443, 5, screen)
 
-
-scr = pygame.display.set_mode((440, 580))
-scr.fill((155, 155, 155))
-
-
 def paint(matrix):
     global scr
     initialize(scr, 160, 80)
@@ -102,6 +100,17 @@ def paint(matrix):
     color_update(matrix, scr)
     pygame.display.update()
 
+colorDict = {
+    "r": red,
+    "y": yellow,
+    "b": blue,
+    "w": white,
+    "g": green,
+    "o": orange
+}
+
+i = input("str: ").lower()
+print(i)
 
 running = True
 while running:
