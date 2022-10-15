@@ -1,6 +1,4 @@
 import pygame
-from pygame.locals import *
-import time
 
 scr = pygame.display.set_mode((550, 580))
 scr.fill((155, 155, 155))
@@ -15,7 +13,6 @@ green = 0, 203, 40
 colors = [red, yellow, blue, white, green, orange]
 
 
-# works
 def initialize(screen, x, y):
     pygame.draw.rect(screen, (255, 255, 255), (x, y, 40, 40), 3)
     pygame.draw.rect(screen, (255, 255, 255), (x + 40, y, 40, 40), 3)
@@ -52,6 +49,7 @@ def color_update(matrix, screen):
     color_side(matrix[4], 403, 203, screen)
     color_side(matrix[5], 163, 323, screen)
 
+
 def paint(matrix):
     global scr
     initialize(scr, 160, 80)
@@ -77,7 +75,7 @@ pattern = ""
 while len(pattern) != 54:
     pattern = input("str: ").lower()
 
-# rywwybyroyoboooobrrgyybrwbggyowrgwybgggwgbwgbbrrwwryoo
+# Splitting string into list where each element in the list is 9 characters long
 config = []
 temp = ""
 i = 1
@@ -88,14 +86,16 @@ for letter in pattern:
         temp = ""
     i += 1
 
+# Converting each character into its corresponding color tuple value
 config_color = []
 for item in config:
     temp = []
     for letter in item:
-        color = colorDict[letter]
-        temp.append(color)
+        converted_color = colorDict[letter]
+        temp.append(converted_color)
     config_color.append(temp)
 
+# Main loop
 running = True
 while running:
     paint(config_color)
