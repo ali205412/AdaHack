@@ -58,5 +58,4 @@ def paint(matrix):
     color_update(matrix,screen)
     pygame.display.update()
  
-while (True):
-    paint([[0,0,0,0],[1,1,1,1],[2,2,2,2],[3,3,3,3],[4,4,4,4],[5,5,5,5]])
+paint([[0,0,0,0],[1,1,1,1],[2,2,2,2],[3,3,3,3],[4,4,4,4],[5,5,5,5]])
