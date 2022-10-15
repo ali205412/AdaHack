@@ -11,6 +11,7 @@ green = 0, 203, 40
 
 colors = [red, yellow, blue, white, green, orange]
 
+
 # works
 def initialize(screen, x, y):
     pygame.draw.rect(screen, (255, 255, 255), (x, y, 40, 40), 3)
@@ -25,19 +26,20 @@ def initialize(screen, x, y):
     pygame.draw.rect(screen, (255, 255, 255), (x + 40, y + 80, 40, 40), 3)
     pygame.draw.rect(screen, (255, 255, 255), (x + 80, y + 80, 40, 40), 3)
 
+
 def color_side(color, x, y, z, screen):
     if z == 0 or z == 1 or z == 5:
         pygame.draw.rect(screen, colors[color[0]], (x, y, 34, 34), 0)
-        pygame.draw.rect(screen, colors[color[1]], (x + 40, y, 34, 34), 0)
-        pygame.draw.rect(screen, colors[color[2]], (x + 80, y, 34, 34), 0)
+        pygame.draw.rect(screen, colors[color[0]], (x + 40, y, 34, 34), 0)
+        pygame.draw.rect(screen, colors[color[0]], (x + 80, y, 34, 34), 0)
 
-        pygame.draw.rect(screen, colors[color[3]], (x, y + 40, 34, 34), 0)
-        pygame.draw.rect(screen, colors[color[4]], (x + 40, y + 40, 34, 34), 0)
-        pygame.draw.rect(screen, colors[color[5]], (x + 80, y + 40, 34, 34), 0)
+        pygame.draw.rect(screen, colors[color[0]], (x, y + 40, 34, 34), 0)
+        pygame.draw.rect(screen, colors[color[0]], (x + 40, y + 40, 34, 34), 0)
+        pygame.draw.rect(screen, colors[color[0]], (x + 80, y + 40, 34, 34), 0)
 
-        pygame.draw.rect(screen, colors[color[6]], (x, y + 80, 34, 34), 0)
-        pygame.draw.rect(screen, colors[color[7]], (x + 40, y + 80, 34, 34), 0)
-        pygame.draw.rect(screen, colors[color[8]], (x + 80, y + 80, 34, 34), 0)
+        pygame.draw.rect(screen, colors[color[0]], (x, y + 80, 34, 34), 0)
+        pygame.draw.rect(screen, colors[color[0]], (x + 40, y + 80, 34, 34), 0)
+        pygame.draw.rect(screen, colors[color[0]], (x + 80, y + 80, 34, 34), 0)
     elif z == 2:
         pygame.draw.rect(screen, colors[color[1]], (x, y, 34, 34), 0)
         pygame.draw.rect(screen, colors[color[1]], (x + 40, y, 34, 34), 0)
@@ -75,6 +77,7 @@ def color_side(color, x, y, z, screen):
         pygame.draw.rect(screen, colors[color[3]], (x + 40, y + 80, 34, 34), 0)
         pygame.draw.rect(screen, colors[color[3]], (x + 80, y + 80, 34, 34), 0)
 
+
 def color_update(matrix, screen):
     color_side(matrix[0], 163, 203, 0, screen)
     color_side(matrix[1], 163, 323, 1, screen)
@@ -84,18 +87,19 @@ def color_update(matrix, screen):
     color_side(matrix[5], 163, 443, 5, screen)
 
 
-def paint(matrix):
-    screen = pygame.display.set_mode((440, 580))
-    screen.fill((155, 155, 155))
+scr = pygame.display.set_mode((440, 580))
+scr.fill((155, 155, 155))
 
-    initialize(screen, 160, 80)
-    initialize(screen, 160, 200)
-    initialize(screen, 160, 320)
-    initialize(screen, 160, 440)
-    initialize(screen, 280, 200)
-    initialize(screen, 40, 200)
-    
-    color_update(matrix, screen)
+
+def paint(matrix):
+    global scr
+    initialize(scr, 160, 80)
+    initialize(scr, 160, 200)
+    initialize(scr, 160, 320)
+    initialize(scr, 160, 440)
+    initialize(scr, 280, 200)
+    initialize(scr, 40, 200)
+    color_update(matrix, scr)
     pygame.display.update()
 
 
