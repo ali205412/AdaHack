@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View Content Detail</title>
+</head>
+<body>
+<h1>{{ name }}</h1>
+<h2>Map</h2>
+<img src="/getMap?name={{ name }}" alt="map"/>
+<a href="/getEUFSMeta?name={{nameZ}}"><h2>eusa_meta (if applicable)</h2></a>
+<p>{{eufs_meta}}</p>
+
+<a href="/getMeta?name={{name}}"><h2>meta (if applicable)</h2></a>
+{{ meta }}
+</body>
+</html>

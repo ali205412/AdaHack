@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import io
 import base64
 import pandas as pd
+from collections import defaultdict
 
 def preprocessing() -> Dict:
     base_dir = './data/Data'
@@ -44,3 +45,24 @@ def draw_map(file_address: str) -> str:
     plt.savefig(my_stringIObytes, format='jpg')
     my_stringIObytes.seek(0)
     return my_stringIObytes
+
+def get_metadata() -> Dict:
+    names = preprocessing()['name']
+    base_dir = './data/Data'
+    eufs_data = None
+
+    result = defaultdict(dict)
+
+    for name in names:
+        try:
+            with open(f'{base_dir}/{name}/eufs_metadata.yaml', mode='r') as f:
+                eufs_data = yaml.safe_load(f)
+        except:
+            pass
+        try:
+            with open(f'{base_dir}/{name}/metadata.yaml', mode='r') as f:
+                data = yaml.safe_load(f)
+        except:
+            pass
+        result[name]['success'] = eufs_data['success']
+    return result
