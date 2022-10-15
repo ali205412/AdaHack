@@ -63,10 +63,9 @@ def paint(matrix):
     pygame.display.update()
 
 
-running = True
-while running:
+while True:
     paint([[0, 0, 0, 0], [1, 1, 1, 1], [2, 2, 2, 2], [3, 3, 3, 3], [4, 4, 4, 4], [5, 5, 5, 5]])
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-# paint([[0, 0, 0, 0], [1, 1, 1,1], [2, 2, 2, 2], [3, 3, 3, 3], [4, 4, 4, 4], [5, 5, 5, 5]])
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
