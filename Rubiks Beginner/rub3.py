@@ -2,8 +2,8 @@ import pygame
 from pygame.locals import *
 import time
 
-scr = pygame.display.set_mode((440, 580))
-scr.fill((155, 155, 155))
+# scr = pygame.display.set_mode((440, 580))
+# scr.fill((155, 155, 155))
 
 blue = 114, 187, 255
 white = 230, 230, 255
@@ -89,6 +89,7 @@ def color_update(matrix, screen):
     color_side(matrix[4], 43, 203, 4, screen)
     color_side(matrix[5], 163, 443, 5, screen)
 
+
 def paint(matrix):
     global scr
     initialize(scr, 160, 80)
@@ -100,6 +101,7 @@ def paint(matrix):
     color_update(matrix, scr)
     pygame.display.update()
 
+
 colorDict = {
     "r": red,
     "y": yellow,
@@ -109,12 +111,49 @@ colorDict = {
     "o": orange
 }
 
-i = input("str: ").lower()
-print(i)
+scrambled = ""
+while len(scrambled) != 54:
+    scrambled = input("str: ").lower()
 
-running = True
-while running:
-    paint([[0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 1, 1, 1, 1, 1, 1, 1, 1], [2, 2, 2, 2, 2, 2, 2, 2, 2], [3, 3, 3, 3, 3, 3, 3, 3, 3], [4, 4, 4, 4, 4, 4, 4, 4, 4], [5, 5, 5, 5, 5, 5, 5, 5, 5]])
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+# rywwybyroyoboooobrrgyybrwbggyowrgwybgggwgbwgbbrrwwryoo
+config = []
+pos = ""
+i = 1
+for letter in scrambled:
+    pos += letter
+    if i % 9 == 0:
+        config.append(pos)
+        pos = ""
+    i += 1
+
+color_config = []
+for item in config:
+    temp = []
+    for letter in item:
+        color = colorDict[letter]
+        temp.append(color)
+    color_config.append(temp)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# running = True
+# while running:
+#     paint([[0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 1, 1, 1, 1, 1, 1, 1, 1], [2, 2, 2, 2, 2, 2, 2, 2, 2],
+#            [3, 3, 3, 3, 3, 3, 3, 3, 3], [4, 4, 4, 4, 4, 4, 4, 4, 4], [5, 5, 5, 5, 5, 5, 5, 5, 5]])
+#     for event in pygame.event.get():
+#         if event.type == pygame.QUIT:
+#             running = False
