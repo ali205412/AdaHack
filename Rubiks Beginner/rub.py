@@ -1,6 +1,5 @@
 import pygame
 from pygame.locals import *
-import time
 
 blue = 114, 187, 255
 white = 230, 230, 255
@@ -15,7 +14,11 @@ colors = [red, yellow, blue, white, green, orange]
 def initialize(screen, x, y):
     pygame.draw.rect(screen, (255, 255, 255), (x, y, 40, 40), 3)
     pygame.draw.rect(screen, (255, 255, 255), (x + 40, y, 40, 40), 3)
+    pygame.draw.rect(screen, (255, 255, 255), (x + 80, y, 40, 40), 3)
+
     pygame.draw.rect(screen, (255, 255, 255), (x, y + 40, 40, 40), 3)
+    pygame.draw.rect(screen, (255, 255, 255), (x+40, y + 40, 40, 40), 3)
+    pygame.draw.rect(screen, (255, 255, 255), (x+80, y + 40, 40, 40), 3)
     pygame.draw.rect(screen, (255, 255, 255), (x + 40, y + 40, 40, 40), 3)
 
 
@@ -63,10 +66,16 @@ def paint(matrix):
     color_update(matrix, screen)
     pygame.display.update()
 
+def initialize(screen, x, y):
+    pygame.draw.rect(screen, (255, 255, 255), (x, y, 40, 40), 90)
+    pygame.draw.rect(screen, (255, 255, 255), (x + 40, y, 40, 40), 3)
+    pygame.draw.rect(screen, (255, 255, 255), (x, y + 40, 40, 40), 3)
+    pygame.draw.rect(screen, (255, 255, 255), (x + 40, y + 40, 40, 40), 3)
 
-running = True
-while running:
+
+while True:
     paint([[0, 0, 0, 0], [1, 1, 1, 1], [2, 2, 2, 2], [3, 3, 3, 3], [4, 4, 4, 4], [5, 5, 5, 5]])
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
